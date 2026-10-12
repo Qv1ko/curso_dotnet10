@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="B2BOrders.Api/B2BOrders.Api.csproj" />
+  <Project Path="B2BOrders.Application/B2BOrders.Application.csproj" />
+  <Project Path="B2BOrders.Domain/B2BOrders.Domain.csproj" />
+  <Project Path="B2BOrders.Infrastructure/B2BOrders.Infrastructure.csproj" />
+</Solution>
