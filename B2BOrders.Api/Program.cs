@@ -14,4 +14,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.MapGet("/health/architecture", () => {
+    return new  {
+        Status = "healthy",
+        Architecture = "Modular Monolith / Hexagonal",
+        Modules = new[]{"Customers", "Orders", "Billings"}
+    };
+});
+
 app.Run();
