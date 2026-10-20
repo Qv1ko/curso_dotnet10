@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Gimnovia.Host/Gimnovia.Host.csproj" />
+  <Project Path="Gimnovia.Modules.Bookings/Gimnovia.Modules.Bookings.csproj" />
+  <Project Path="Gimnovia.Modules.Members/Gimnovia.Modules.Members.csproj" />
+</Solution>

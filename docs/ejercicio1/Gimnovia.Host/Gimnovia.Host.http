@@ -1,0 +1,6 @@
+@Gimnovia.Host_HostAddress = http://localhost:5045
+
+GET {{Gimnovia.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
