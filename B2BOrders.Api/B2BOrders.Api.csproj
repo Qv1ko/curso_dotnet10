@@ -8,10 +8,12 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.13" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\B2BOrders.Application\B2BOrders.Application.csproj" />
+    <ProjectReference Include="..\B2BOrders.Infrastructure\B2BOrders.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
