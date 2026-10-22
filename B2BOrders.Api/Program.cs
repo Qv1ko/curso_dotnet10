@@ -1,8 +1,16 @@
+using System.Runtime.InteropServices;
+using Microsoft.EntityFrameworkCore;
+using B2BOrders.Infrastructure.Orders;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<OrdersDbContext>(options => options.UseSqlServer(connectionString));
 
 var app = builder.Build();
 
@@ -21,5 +29,38 @@ app.MapGet("/health/architecture", () => {
         Modules = new[]{"Customers", "Orders", "Billings"}
     };
 });
+
+app.MapGet("/orders", async (OrdersDbContext db) => {
+    return await db.Orders
+        .OrderByDescending(o => o.CreatedAt)
+        .Take(1000)
+        .Select(o => new { o.Id, Date = o.CreatedAt, o.Total })
+        .ToListAsync();
+});
+
+// Seed Automático
+using (var scope = app.Services.CreateScope()) {
+    var dbContext = scope.ServiceProvider.GetRequiredService<OrdersDbContext>();
+    dbContext.Database.EnsureCreated(); // Crea la base de datos y las tablas
+
+    if (!dbContext.Orders.Any()) {
+        Console.WriteLine("Seeding initial orders data...");
+
+        var orders = new List<Order>();
+
+        for (int i = 0; i < 10000; i++) {
+            orders.Add(new Order{
+                CustomerId = i % 100,
+                CreatedAt = DateTime.Now.AddDays(-new Random().Next(0, 1000)),
+                Total = (decimal)(new Random().NextDouble() * 1000)
+            });
+        }
+
+        dbContext.Orders.AddRange(orders);
+        dbContext.SaveChanges();
+
+        Console.WriteLine("Seeding completed.");
+    }
+}
 
 app.Run();
