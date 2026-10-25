@@ -16,7 +16,15 @@ internal class Booking
 internal class BookingsDbContext(DbContextOptions<BookingsDbContext> options) : DbContext(options)
 {
     public DbSet<Booking> Bookings => Set<Booking>();
-    protected override void OnModelCreating(ModelBuilder builder) => builder.HasDefaultSchema("bookings");
+
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.HasDefaultSchema("bookings");
+
+        builder.Entity<Booking>()
+            .Property(b => b.Total)
+            .HasPrecision(18, 2);
+    }
 }
 
 internal class BookingService(BookingsDbContext db, IMembershipService members) : IBookingService
