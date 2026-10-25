@@ -1,11 +1,9 @@
 # Tema 1 — Arquitecturas modernas de backend en .NET 10
 
-> Documento unificado: resumen, teoría (Manual I) y laboratorio práctico `B2BOrders`.
-
 ## Contenido
 
 - [Resumen del Tema 1](#resumen-del-tema-1)
-- [Manual I: Evolución y Selección de Arquitecturas en .NET 10](#manual-i-evolución-y-selección-de-arquitecturas-en-net-10)
+- [Evolución y Selección de Arquitecturas en .NET 10](#evolución-y-selección-de-arquitecturas-en-net-10)
 - [Laboratorio B2BOrders](#laboratorio-b2borders)
 
 ---
@@ -80,7 +78,7 @@ Conceptos clave: **Ley de Conway** (el sistema copia la estructura de comunicaci
 
 ---
 
-## Manual I: Evolución y Selección de Arquitecturas en .NET 10
+## Evolución y Selección de Arquitecturas en .NET 10
 
 ### 1. Evolución Histórica de las Arquitecturas de Backend
 
