@@ -30,12 +30,15 @@ app.MapGet("/health/architecture", () => {
     };
 });
 
-app.MapGet("/orders", async (OrdersDbContext db) => {
-    return await db.Orders
+app.MapGet("/orders", async (OrdersDbContext db, int page = 1, int pageSize = 20) => {
+    var query = db.Orders
+        .AsNoTracking()
         .OrderByDescending(o => o.CreatedAt)
-        .Take(1000)
+        .Skip((page -1) * pageSize)
+        .Take(pageSize)
         .Select(o => new { o.Id, Date = o.CreatedAt, o.Total })
-        .ToListAsync();
+        
+    return await query.ToListAsync();
 });
 
 // Seed Automático
