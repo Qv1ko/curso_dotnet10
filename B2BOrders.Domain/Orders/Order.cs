@@ -20,6 +20,14 @@ public class Order {
     }
 
     public void AddLine(int productId, int quantity, Money unitPrice) {
+        if (quantity <= 0) {
+            throw new ArgumentException("La cantidad debe ser mayor que cero.", nameof(quantity));
+        }
+
+        if (Status != OrderStatus.New) {
+            throw new ArgumentException("No se pueden añadir productos a un pedido que no está en estado 'New'.")
+        }
+
         var line = new OrderLine(productId, quantity, unitPrice);
         _orderLines.Add(line);
         RecalculateTotal();
@@ -27,5 +35,31 @@ public class Order {
 
     private void RecalculateTotal() {
         TotalAmount = _orderLines.Aggregate(Money.Zero("EUR"), (current, line) => current + line.TotalPrice);
+    }
+
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public IReadOnlyCollection<IDomainEvent> PullDomainEvents() {
+        var events = _domainEvents.ToList();
+        _domainEvents.Clear();
+        return events;
+    }
+
+    private void AddDomainEvent(IDomainEvent domainEvent) {
+        _domainEvents.Add(domainEvent);
+    }
+
+    public void MarkAdPaid(int PaymentId) {
+        if (Status == OrderStatus.Paid) {
+            return;
+        }
+
+        if (TotalAmount.Amount <= 0) {
+            throw new InvalidOperationException("No se puede pagar un pedido con importe cero o negativo.");
+        }
+
+        Status = OrderStatus.Paid;
+
+        AddDomainEvent(new OrderPaidDomainEvent(Id, PaymentId, TotalAmount));
     }
 }
