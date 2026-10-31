@@ -25,7 +25,7 @@ public class Order {
         }
 
         if (Status != OrderStatus.New) {
-            throw new ArgumentException("No se pueden añadir productos a un pedido que no está en estado 'New'.")
+            throw new ArgumentException("No se pueden añadir productos a un pedido que no está en estado 'New'.");
         }
 
         var line = new OrderLine(productId, quantity, unitPrice);
