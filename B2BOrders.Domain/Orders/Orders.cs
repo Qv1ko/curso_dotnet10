@@ -1,1 +1,0 @@
-namespace B2BOrders.Domain.Orders;
