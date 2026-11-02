@@ -36,7 +36,7 @@ app.MapGet("/orders", async (OrdersDbContext db, int page = 1, int pageSize = 20
         .OrderByDescending(o => o.CreatedAt)
         .Skip((page -1) * pageSize)
         .Take(pageSize)
-        .Select(o => new { o.Id, Date = o.CreatedAt, o.Total })
+        .Select(o => new { o.Id, Date = o.CreatedAt, o.Total });
         
     return await query.ToListAsync();
 });

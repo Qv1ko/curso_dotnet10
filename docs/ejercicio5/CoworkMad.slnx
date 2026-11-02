@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Coworking.Aplicacion/Coworking.Aplicacion.csproj" />
+  <Project Path="Coworking.Dominio/Coworking.Dominio.csproj" />
+  <Project Path="Coworking.Infraestructura/Coworking.Infraestructura.csproj" />
+  <Project Path="Coworking.Tests/Coworking.Tests.csproj" />
+</Solution>
