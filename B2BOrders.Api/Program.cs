@@ -1,6 +1,11 @@
 using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using B2BOrders.Infrastructure.Orders;
+using B2BOrders.Infrastructure.Billings;
+using B2BOrders.Infrastructure.Customers;
+using B2BOrders.Application.Billings;
+using B2BOrders.Application.Orders;
+using B2BOrders.Application.Customers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +16,10 @@ builder.Services.AddOpenApi();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddDbContext<OrdersDbContext>(options => options.UseSqlServer(connectionString));
+
+builder.Services.AddScoped<ICustomerRepository, EfCoreCustomerRepository>();
+builder.Services.AddScoped<IOrderRepository, EfCoreOrderRepository>();
+builder.Services.AddScoped<IBillingService, FakeBillingService>();
 
 var app = builder.Build();
 
@@ -30,6 +39,7 @@ app.MapGet("/health/architecture", () => {
     };
 });
 
+/*
 app.MapGet("/orders", async (OrdersDbContext db, int page = 1, int pageSize = 20) => {
     var query = db.Orders
         .AsNoTracking()
@@ -40,8 +50,10 @@ app.MapGet("/orders", async (OrdersDbContext db, int page = 1, int pageSize = 20
         
     return await query.ToListAsync();
 });
+*/
 
 // Seed Automático
+/*
 using (var scope = app.Services.CreateScope()) {
     var dbContext = scope.ServiceProvider.GetRequiredService<OrdersDbContext>();
     dbContext.Database.EnsureCreated(); // Crea la base de datos y las tablas
@@ -65,5 +77,6 @@ using (var scope = app.Services.CreateScope()) {
         Console.WriteLine("Seeding completed.");
     }
 }
+*/
 
 app.Run();
