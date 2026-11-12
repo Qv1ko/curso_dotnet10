@@ -1,5 +1,7 @@
 using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
+using MediatR;
+using B2BOrders.Api;
 using B2BOrders.Infrastructure.Orders;
 using B2BOrders.Infrastructure.Billings;
 using B2BOrders.Infrastructure.Customers;
@@ -20,6 +22,10 @@ builder.Services.AddDbContext<OrdersDbContext>(options => options.UseSqlServer(c
 builder.Services.AddScoped<ICustomerRepository, EfCoreCustomerRepository>();
 builder.Services.AddScoped<IOrderRepository, EfCoreOrderRepository>();
 builder.Services.AddScoped<IBillingService, FakeBillingService>();
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(
+    typeof(CreateCustomerCommand).Assembly
+));
 
 var app = builder.Build();
 
@@ -78,5 +84,7 @@ using (var scope = app.Services.CreateScope()) {
     }
 }
 */
+
+app.MapCustomersEndpoints();
 
 app.Run();
