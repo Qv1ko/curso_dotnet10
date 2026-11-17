@@ -1,7 +1,5 @@
 # Tema 3 — Domain-Driven Design (DDD) Táctico en .NET 10
 
-> Documento unificado: resumen, teoría (Manual I: Estructura y Elementos del DDD) y laboratorio práctico en `B2BOrders` (dominio, capa de aplicación y tests unitarios).
-
 ## Contenido
 
 - [Resumen del Tema 3](#resumen-del-tema-3)

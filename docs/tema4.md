@@ -1,6 +1,4 @@
-# Tema 4
-
-**Bloque 4: Arquitectura Hexagonal y Monolito Modular**
+# Tema 4 - Arquitectura Hexagonal y Monolito Modular
 
 ## Índice
 
