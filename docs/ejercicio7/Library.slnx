@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="Library.Api/Library.Api.csproj" />
+  <Project Path="Library.Application/Library.Application.csproj" />
+  <Project Path="Library.ArchitectureTests/Library.ArchitectureTests.csproj" />
+  <Project Path="Library.Domain/Library.Domain.csproj" />
+  <Project Path="Library.Infrastructure/Library.Infrastructure.csproj" />
+</Solution>
