@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Tienda.Catalogo";
+
+service Catalogo {
+  rpc ObtenerProducto (ProductoRequest) returns (ProductoReply);
+}
+
+message ProductoRequest {
+  string sku = 1;
+}
+
+message ProductoReply {
+  string sku = 1;
+  string nombre = 2;
+  int32 precio_centimos = 3;
+  int32 stock = 4;
+}
